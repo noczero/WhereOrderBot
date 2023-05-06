@@ -18,6 +18,10 @@ class NERTestCase(unittest.TestCase):
         result = self.model.predict("My order is #ABD23D")
         self.assertEqual(result, "ABD23D")
 
+    def test_predict_order_id_double(self):
+        result = self.model.predict("My order is #ABD23D. Can you BLa bla with id #1324AN")
+        self.assertEqual(result, "ABD23D")s
+
     def test_predict_all_order_id(self):
         for actual_intent, prompt in self.test_case_dict.items():
             predict_intent = self.model.predict(prompt)

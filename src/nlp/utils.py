@@ -1,4 +1,5 @@
 import pickle
+from enum import Enum
 
 LABEL_TO_INTENT_CLASS = {
     0: 'feedback',
@@ -10,6 +11,11 @@ LABEL_TO_INTENT_CLASS = {
 }
 
 
+class EntityLabelNER(Enum):
+    NO_ENTITY = 'LABEL_0'
+    ORDER_ID = 'LABEL_1'
+
+
 def load_pickle_model(model_path: str) -> any:
     file = open(model_path, 'rb')
     model = pickle.load(file)
@@ -19,16 +25,19 @@ def load_pickle_model(model_path: str) -> any:
 
 def get_order_id(ner_predictions: list[dict]) -> str:
     pre_process_str = ''
-    is_order_id = True
+    prev_entity = None
     for ner in ner_predictions:
+
+        # prevent double order id
+        if prev_entity and ner['entity'] != prev_entity:
+            break
+
         # match the ORDER_ID tag with LABEL_1
-        if ner['entity'] == "LABEL_1" and is_order_id:
+        if ner['entity'] == EntityLabelNER.ORDER_ID.value:
             # concatenate thw word
             pre_process_str += ner['word']
             # keep state
-            is_order_id = True
-        else:
-            is_order_id = False
+            prev_entity = EntityLabelNER.ORDER_ID.value
 
     # replace 'R' tp empty space and return
     return pre_process_str.upper().replace('#', ''). \
