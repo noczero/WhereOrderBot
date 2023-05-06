@@ -1,0 +1,41 @@
+WhereOrderBot
+====
+Simple bot assistant that can answer "Where is my order?".
+
+# Context
+Implement a bot assistant that will provide some answers based on the question prompts.
+Additionally, you would like to assess whether the question can be answered automatically by a computer or if a human should respond.
+
+The bot has some constraints and limitations to make it simple.
+1. The bot can't have the memory of the conversation. It means it gives just a single answer for single questions and single-order items.
+2. The bot will give a response for where_is_my_order only category or intent, beside that it won't. It requires building an Intent Classification model.
+3. Assume the bot can connect to an internal API that provides order information with http://localhost/orders/{order_id} and the user can click the link to proceed and it has a user cookie or token to validate the user. the bot's message response will be concatenated with the link.
+4. If there's no order id in the prompts, it will use the latest user's order id otherwise it will extract the order_id using the NER model.
+5. To assess whether the question will be answered by a human or the bot by using the Sentiment-Analysis model, if the user question is unhappy or mad, or unpleasant it requires the human to answer it.
+6. The bot response template may vary with order response whether it is late or on schedule.
+
+Example bot conversation will have:
+```
+AI: Hi! Can I help you?
+
+Human :
+Hello, I haven't received any updates regarding the estimated shipping date for my order (#135792). Can you please let me know when I can expect my custom mechanical keyboard to arrive? Thank you!
+
+AI :
+Hello! Thank you for providing your order number (#135792) {http://e-commerce/orders/135792}.
+I apologize for the lack of updates on the estimated shipping date for your {product_name}.
+
+Based on the current progress, we expect your {product_name} to be shipped out within the next {estimated_delivery_date} business days. Once it's on its way, you will receive a shipping confirmation email with the tracking details. Please note that actual delivery times may vary depending on the shipping method and your location.
+
+I genuinely appreciate your patience and understanding in this matter. We value your business and are committed to providing you with a top-notch product. If you have any further questions or concerns, please don't hesitate to let me know.
+```
+
+# Prerequisite
+1. Python 3.10
+2. Setfit Model
+3. Huggingface Transformers
+
+# How to Run
+
+# Result
+
