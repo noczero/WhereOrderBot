@@ -2,14 +2,14 @@ import unittest
 
 from src.nlp.intent import IntentModel
 
-MODEL_PATH = "../model/setfit_model_finetuned.pickle"
+INTENT_MODEL_PATH = "../model/setfit_model_finetuned.pickle"
 
 
 class IntentTestCase(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(IntentTestCase, self).__init__(*args, **kwargs)
-        self.model = IntentModel(model_name_or_path=MODEL_PATH)
+        self.model = IntentModel(model_name_or_path=INTENT_MODEL_PATH)
         self.test_case_dict = {
             'where_is_my_order': "Hello Support Team,\nCan you give me a better idea of where we're at regarding the delivery status timeline of order ref# 55503?\nAlso really interested about keycap types; how different does using PBT material make compared to ABS when typing over longer periods?",
             'feedback': "I'm not satisfied with the build quality of the keyboard I purchased. It feels cheap and flimsy.",
