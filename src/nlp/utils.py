@@ -1,19 +1,29 @@
 import pickle
 from enum import Enum
 
-LABEL_TO_INTENT_CLASS = {
-    0: 'feedback',
-    1: 'general_enquiry',
-    2: 'other',
-    3: 'refund_question',
-    4: 'spam',
-    5: 'where_is_my_order',
-}
+
+class IntentCategory(Enum):
+    FEEDBACK = 'feedback',
+    GENERAL_ENQUIRY = 'general_enquiry',
+    OTHER = 'other',
+    REFUND_QUESTION = 'refund_question',
+    SPAM = 'spam',
+    WHERE_IS_MY_ORDER = 'where_is_my_order'
 
 
 class EntityLabelNER(Enum):
     NO_ENTITY = 'LABEL_0'
     ORDER_ID = 'LABEL_1'
+
+
+LABEL_TO_INTENT_CLASS = {
+    0: IntentCategory.FEEDBACK.value,
+    1: IntentCategory.GENERAL_ENQUIRY.value,
+    2: IntentCategory.OTHER.value,
+    3: IntentCategory.REFUND_QUESTION.value,
+    4: IntentCategory.SPAM.value,
+    5: IntentCategory.WHERE_IS_MY_ORDER.value,
+}
 
 
 def load_pickle_model(model_path: str) -> any:
