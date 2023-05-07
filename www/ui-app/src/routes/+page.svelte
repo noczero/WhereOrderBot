@@ -14,6 +14,10 @@
 
 </script>
 
+<svelte:head>
+	<title>Home / WhereOrderBot</title>
+</svelte:head>
+
 <section class="text-center">
 <!--    <h1>WhereOrderBot - An AI-powered Chatbot</h1>-->
 <!--    <small>by noczero</small>-->
