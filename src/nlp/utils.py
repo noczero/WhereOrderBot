@@ -27,10 +27,10 @@ LABEL_TO_INTENT_CLASS = {
 
 
 def load_pickle_model(model_path: str) -> any:
-    file = open(model_path, 'rb')
-    model = pickle.load(file)
-    file.close()
-    return model
+    # Open the file in binary mode
+    with open(model_path, 'rb') as file:
+        # Call load method to deserialze
+        return pickle.load(file)
 
 
 def get_order_id(ner_predictions: list[dict]) -> str:
