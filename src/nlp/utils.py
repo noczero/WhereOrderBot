@@ -53,4 +53,6 @@ def get_order_id(ner_predictions: list[dict]) -> str:
     return pre_process_str.upper().replace('#', ''). \
         replace('(', ''). \
         replace(')', ''). \
-        replace('.', '')
+        replace('.', ''). \
+        replace('?', ''). \
+        replace('!', '')
