@@ -3,11 +3,11 @@ from enum import Enum
 
 
 class IntentCategory(Enum):
-    FEEDBACK = 'feedback',
-    GENERAL_ENQUIRY = 'general_enquiry',
-    OTHER = 'other',
-    REFUND_QUESTION = 'refund_question',
-    SPAM = 'spam',
+    FEEDBACK = 'feedback'
+    GENERAL_ENQUIRY = 'general_enquiry'
+    OTHER = 'other'
+    REFUND_QUESTION = 'refund_question'
+    SPAM = 'spam'
     WHERE_IS_MY_ORDER = 'where_is_my_order'
 
 
