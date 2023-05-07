@@ -1,5 +1,6 @@
 import {SSE} from 'sse.js';
 import {get, writable} from 'svelte/store';
+import {PUBLIC_BOT_CHAT_API_URL} from '$env/static/public';
 
 export interface ChatTranscript {
     messages: [{ '' }];
@@ -31,7 +32,7 @@ const set = async (query: string) => {
         prompt : query
     }
 
-    const chatResponse = await fetch('http://localhost:8081/api/v1/chat/completions', {
+    const chatResponse = await fetch(`${PUBLIC_BOT_CHAT_API_URL}/api/v1/chat/completions`, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -47,8 +48,8 @@ const set = async (query: string) => {
 
     const result = await chatResponse.json()
     // console.log(result)
-    if (result.data) {
-        answer.set(result.data)
+    if (result.data.message) {
+        answer.set(result.data.message)
     } else {
         answer.set("I apologize, but I'm not programmed to understand certain types of language or slang. Could you please rephrase your statement using more common terminology?")
     }
