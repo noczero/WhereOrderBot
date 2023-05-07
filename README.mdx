@@ -2,7 +2,7 @@ WhereOrderBot
 ====
 Simple bot assistant that can answer "Where is my order?".
 
-# Context
+## Context
 Implement a bot assistant that will provide some answers based on the question prompts.
 Additionally, you would like to assess whether the question can be answered automatically by a computer or if a human should respond.
 
@@ -30,12 +30,37 @@ Based on the current progress, we expect your {product_name} to be shipped out w
 I genuinely appreciate your patience and understanding in this matter. We value your business and are committed to providing you with a top-notch product. If you have any further questions or concerns, please don't hesitate to let me know.
 ```
 
-# Prerequisite
+## Prerequisite
 1. Python 3.10
 2. Setfit Model
 3. Huggingface Transformers
+4. Node.js 20.1.0
 
-# How to Run
+## How to Run
+1. install python package with
+```
+$ pip install -r requirements.txt
+```
 
-# Result
+2. copy and fill the environment variable from env.example
+```
+$ cp .env.example .env
+```
+
+3. install ui-app node modules in ./www/ui-app/
+```
+$ npm install
+```
+
+4. to run api service
+```
+$ ./start-api.sh
+```
+
+5. to run ui service
+```
+$ ./start-ui.sh
+```
+
+## Result
 
