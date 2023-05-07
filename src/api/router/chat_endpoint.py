@@ -16,4 +16,9 @@ ChatBot = Annotated[WhereOrderBot, Depends(get_chat_bot)]
 async def completions(request: CompletionsWebRequest, chatbot: ChatBot):
     result = chatbot.understanding(request.prompt)
     logger.debug(result)
-    return request
+
+    web_response = {
+        "status": "OK",
+        "data": result
+    }
+    return web_response
