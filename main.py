@@ -33,7 +33,7 @@ app.add_middleware(
 )
 
 # include api router outside with prefix
-app.include_router(api_router, prefix=settings.API_VERSION_PREFIX)
+app.include_router(api_router, prefix=f"/api{settings.API_VERSION_PREFIX}")
 
 # setup logger
 # s_logger = logging.getLogger("uvicorn")
