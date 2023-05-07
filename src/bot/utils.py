@@ -25,10 +25,13 @@ def get_ordered_product(order_id: str) -> OrderedProduct:
                               tracking=Tracking(name="FedEx", status="in transit", estimate_process_time="1"))
     else:
         # get random, assume its latest order id
-        return list_product[random.randint(0, len(list_product))]
+        return list_product[random.randint(0, len(list_product)-1)]
 
 
 def process_where_is_my_order_intent(input_message:InputMessage):
     match input_message.product.tracking.status:
         case "out for delivery":
             return where_my_order_intent.out_of_delivery(input_message=input_message)
+
+        case "shipment information received":
+            return where_my_order_intent.delayed_schedule(input_message=input_message)
