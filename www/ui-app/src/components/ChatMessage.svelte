@@ -1,0 +1,50 @@
+<script lang="ts">
+  import Markdown from 'svelte-exmarkdown';
+  import { marked } from 'marked';
+  import DOMPurify from 'isomorphic-dompurify';
+  // import type { ChatCompletionRequestMessageRoleEnum } from 'openai';
+  import { onMount } from 'svelte';
+
+  // export let type: ChatCompletionRequestMessageRoleEnum;
+
+  export let type = '';
+  export let message = '';
+  export { classes as class };
+
+  let classes = '';
+  let scrollToDiv: HTMLDivElement;
+
+  const classSet = {
+    user: 'justify-end text-white-700',
+    assistant: 'justify-start text-teal-400',
+    system: 'justify-center text-gray-400'
+  };
+
+  const typeEffect = (node: HTMLDivElement, message: string) => {
+    return {
+      update(message: string) {
+        scrollToDiv.scrollIntoView({ behavior: 'auto', block: 'end', inline: 'end' });
+      }
+    };
+  };
+
+  onMount(() => {
+    scrollToDiv.scrollIntoView({ behavior: 'auto', block: 'end', inline: 'end' });
+  });
+</script>
+
+<div class="flex items-center {classSet[type]} ">
+  <p class="text-xs px-2">{type === 'user' ? 'Me' : 'Bot'}</p>
+</div>
+
+<div class="flex {classSet[type]}">
+  <div
+    use:typeEffect={message}
+    class="bg-black py-0.5 px-4 max-w-5xl rounded leading-loose {classes} {classSet[type]}"
+  >
+    <div class="text-center sm:text-left">
+          {@html DOMPurify.sanitize(marked.parse(message))}
+    </div>
+  </div>
+  <div bind:this={scrollToDiv}></div>
+</div>

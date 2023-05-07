@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --cyan-100: 183 90% 90%;
+  --cyan-200: 183 90% 80%;
+  --cyan-300: 183 90% 70%;
+  --cyan-400: 183 90% 60%;
+  --cyan-500: 183 90% 50%;
+  --cyan-600: 183 90% 40%;
+  --cyan-700: 183 90% 30%;
+  --cyan-800: 183 90% 20%;
+  --cyan-900: 183 90% 10%;
+}
+
+
+pre {
+	display: inline-flex;
+	padding: 0.5rem;
+	width: 100%;
+	border-radius: 0.25rem
+}
+
+/*code {*/
+/*	background-color: rgba(44, 43, 43, 0.6);*/
+/*	color: rgb(190 18 60 / var(--tw-text-opacity));*/
+/*	border-radius: 0.25rem;*/
+/*	padding: 0 0.5rem;*/
+
+
+/*}*/
+
+body {
+	color: white;
+	background-color: #131416;
+}
+
+ol {
+	list-style: number;
+	padding: 1rem;
+}
+
+ol > li {
+	margin: 1rem 0;
+}
