@@ -2,4 +2,7 @@ from src.bot.scheme import InputMessage
 
 
 def default_msg(input_message:InputMessage):
-    pass
+    return """
+    I apologize, but I'm not programmed to handle the spam message. 
+    Could you please ask me another question?
+    """

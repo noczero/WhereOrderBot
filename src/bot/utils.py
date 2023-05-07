@@ -1,14 +1,38 @@
 import random
 
 from src.bot.scheme import OrderedProduct, Tracking, InputMessage
-from src.bot.templates import where_my_order_intent
+from src.bot.templates import where_my_order_intent, fallback
 
 list_product = [
-    OrderedProduct(order_id="678910", name="custom mechanical keyboard",
-                   tracking=Tracking(name="FedEx", status="out for delivery", estimate_process_time="3")),
-    OrderedProduct(order_id="123AVS", name="product B",
-                   tracking=Tracking(name="DHL", status="shipment information received", estimate_process_time="1"))
+    OrderedProduct(order_id="678910", name="custom mechanical keyboard A",
+                   tracking=Tracking(name="FedEx", status="out for delivery", estimate_process_time="2")),
 
+    OrderedProduct(order_id="YY765Z", name="mech keyboard B",
+                   tracking=Tracking(name="FedEx", status="shipment information received", estimate_process_time="2")),
+
+    OrderedProduct(order_id="33321", name="custom mechanical keyboard C",
+                   tracking=Tracking(name="FedEx", status="in transit", estimate_process_time="1")),
+
+    OrderedProduct(order_id="212223", name="custom mechanical keyboard D",
+                   tracking=Tracking(name="FedEx", status="delivery exception", estimate_process_time="4")),
+
+    OrderedProduct(order_id="BB2223", name="custom mechanical keyboard F",
+                   tracking=Tracking(name="FedEx", status="delivery exception", estimate_process_time="5")),
+
+    OrderedProduct(order_id="66604", name="custom mechanical keyboard G",
+                   tracking=Tracking(name="FedEx", status="out for delivery", estimate_process_time="1")),
+
+    OrderedProduct(order_id="123ABC", name="custom mechanical keyboard H",
+                   tracking=Tracking(name="FedEx", status="delivery exception", estimate_process_time="5")),
+
+    OrderedProduct(order_id="YY654E", name="custom mechanical keyboard I",
+                   tracking=Tracking(name="FedEx", status="in local facility", estimate_process_time="4")),
+
+    OrderedProduct(order_id="22343", name="custom mechanical keyboard J",
+                   tracking=Tracking(name="FedEx", status="shipment information received", estimate_process_time="2")),
+
+    OrderedProduct(order_id="34123", name="custom mechanical keyboard J",
+                   tracking=Tracking(name="FedEx", status="delivered", estimate_process_time="0")),
 ]
 
 
@@ -35,3 +59,18 @@ def process_where_is_my_order_intent(input_message:InputMessage):
 
         case "shipment information received":
             return where_my_order_intent.delayed_schedule(input_message=input_message)
+
+        case "delivered":
+            return where_my_order_intent.delivered(input_message=input_message)
+
+        case "delivery exception":
+            return where_my_order_intent.issue_exeception(input_message=input_message)
+
+        case "in local facility":
+            return where_my_order_intent.in_local_facility(input_message=input_message)
+
+        case "in transit":
+            return where_my_order_intent.in_transit(input_message=input_message)
+
+        case _:
+            return fallback.msg_default(input_message=input_message)
