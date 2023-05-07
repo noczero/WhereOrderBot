@@ -1,10 +1,12 @@
 import logging.config
 
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
 from fastapi.logger import logger
 from starlette.middleware.cors import CORSMiddleware
 from pythonjsonlogger import jsonlogger
-
+from starlette.responses import JSONResponse
 
 from config import settings
 from src.api.router import api_router
@@ -31,6 +33,32 @@ app.add_middleware(
     allow_headers=["*"],
     max_age=3600
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    """
+    THis function allows to send response to FE when invalid pydantic validation happened.
+    :rtype: object
+    """
+    err = exc.errors()
+    logger.error(err)
+    error_string = ""
+    for e in err:
+        error_string = error_string + str(e["loc"][-1]) + " - " + str(e["msg"]) + "\n"
+
+    return JSONResponse(
+        content=jsonable_encoder(
+            {
+                "code": 400,
+                "status": "BAD REQUEST",
+                "data": {
+                    "error": error_string
+                }
+            }
+        ),
+        status_code=400,
+    )
 
 # include api router outside with prefix
 app.include_router(api_router, prefix=f"/api{settings.API_VERSION_PREFIX}")
