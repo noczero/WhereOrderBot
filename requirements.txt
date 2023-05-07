@@ -1,0 +1,11 @@
+torch
+torchvision
+torchaudio
+openpyxl
+pandas
+transformers
+setfit[optuna]==0.3.0
+fastapi
+uvicorn
+python-dotenv
+python-json-logger
