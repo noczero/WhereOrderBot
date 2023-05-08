@@ -42,7 +42,7 @@
     use:typeEffect={message}
     class="bg-black py-0.5 px-4 max-w-5xl rounded leading-loose {classes} {classSet[type]}"
   >
-    <div class="text-center sm:text-left">
+    <div class="sm:text-left">
           {@html DOMPurify.sanitize(marked.parse(message))}
     </div>
   </div>
